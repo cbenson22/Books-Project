@@ -32,6 +32,13 @@ namespace Books_Project
             });
 
             services.AddScoped<IBooksRepository, EFBookRepository>();
+            services.AddScoped<IBuyRepository, EFBuyRepository > ();
+            services.AddRazorPages();
+            services.AddDistributedMemoryCache();
+            services.AddSession();
+            services.AddScoped<Basket>(x => SessionBasket.GetBasket(x));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddServerSideBlazor();
 
         }
 
@@ -44,11 +51,32 @@ namespace Books_Project
             }
 
             app.UseStaticFiles();
+            app.UseSession();
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute("typepage", "{categoryType}/Page{pageNum}", new { Controller = "Home", action = "Index"});
+                
+                endpoints.MapControllerRoute(
+                    name: "Paging",
+                    pattern: "Page{pageNum}",
+                    defaults: new { Controller = "Home", action = "Index", pageNum = 1 });
                 endpoints.MapDefaultControllerRoute();
+
+                
+
+                endpoints.MapControllerRoute("type",
+                    "{categoryType}",
+                    new { Controller = "Home", action = "Index", pageNum = 1 });
+
+                endpoints.MapDefaultControllerRoute();
+
+                endpoints.MapRazorPages();
+                endpoints.MapBlazorHub();
+                endpoints.MapFallbackToPage("/admin/{*catchall}", "/Admin/Index");
+                
+                
             });
         }
     }

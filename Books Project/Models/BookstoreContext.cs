@@ -21,6 +21,8 @@ namespace Books_Project.Models
 
         public  DbSet<Book> Books { get; set; }
 
+        public DbSet<Buy> Buys{ get; set; }
+
         
     }
 }

@@ -2,24 +2,14 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @model BooksViewModel
-    <link href="~/lib/css/bootstrap.min.css" rel="stylesheet" />
-    <div class="bg-dark text-white p-2">
-        <span class="navbar-brand ml-2">COLE'S BOOK STORE</span>
-    </div>
+    
 
 @foreach (Book b in Model.Books)
 {
-    <h3 class="text-center">@b.Title</h3>
-    <ul class="list-group">
-        <li class="list-group-item list-group-item-primary">Author: @b.Author</li>
-        <li class="list-group-item list-group-item-secondary">Publisher: @b.Publisher</li>
-        <li class="list-group-item list-group-item-secondary">ISBN: @b.Isbn</li>
-        <li class="list-group-item list-group-item-secondary">Classification: @b.Classification</li>
-        <li class="list-group-item list-group-item-secondary">Category: @b.Category</li>
-        <li class="list-group-item list-group-item-secondary">Number of Pages: @b.PageCount</li>
-        <li class="list-group-item list-group-item-success">Price: @b.Price</li>
-        
-    </ul>
+    <partial name="ProjectSummary" model="b"/>
 }
 
-<div page-blah="@Model.PageInfo" page-action="Index" class="btn btn-group-lg"></div>
+<div page-blah="@Model.PageInfo" page-action="Index" page-class="btn"
+     page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
+     page-classes-enabled="true"
+     class="btn-group pull-right m-1"></div>
