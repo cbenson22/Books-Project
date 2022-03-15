@@ -1,8 +1,12 @@
 ﻿@page "/admin/buys"
 @inherits OwningComponentBase<IBuyRepository>
 
-<BuyTable TableTitle ="Uncollected Purchases" Buys ="UncollectedPurchases" ButtonLabel="Collected" BuySelected="CollectPurchase"></BuyTable>
-<BuyTable TableTitle="Collected Purchases" Buys="CollectedPurchases" ButtonLabel="Reset" BuySelected="ResetPurchase"></BuyTable>
+<BuyTable TableTitle ="Uncollected Purchases" Buys ="UncollectedPurchases" 
+          ButtonLabel="Collected" BuySelected="CollectPurchase"></BuyTable>
+
+<BuyTable TableTitle="Collected Purchases" Buys="CollectedPurchases" 
+          ButtonLabel="Reset" BuySelected="ResetPurchase"></BuyTable>
+
 <button class="btn btn-info" @onclick="@(x => UpdateData())">Refresh Data</button>
 
 @code {
