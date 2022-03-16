@@ -15,6 +15,12 @@
                         <td>@b.Zip</td>
                         <th>Book</th>
                         <th>Quantity</th>
+                        
+                        <td>
+                                <button class="btn btn-sm btn-danger" @onclick="(x => BuySelected.InvokeAsync(b.OrderId))">
+                                    @ButtonLabel
+                                </button>
+                        </td>
                     </tr>
 
                     @foreach (BasketLineItem bli in b.Lines)
@@ -23,14 +29,7 @@
                             <td colspan="2"></td>
                             <td>@bli.Book.Title</td>
                              <td>@bli.Quantity</td>
-                            
-                            <td>
-                                <button class="btn btn-sm btn-danger" @onclick="(x => BuySelected.InvokeAsync(b.OrderId))">
-                                    @ButtonLabel
-                                </button>
-                            </td>
-                            
-
+     
                        </tr>
                     }
                 }
