@@ -1,4 +1,4 @@
-﻿<table class="table table-sm table-striped table-bordered">
+﻿<table class="table table-sm table-striped table-bordered table-hover">
     <thead>
         <tr>
             <th colspan="5" class="text-center">@TableTitle</th>
@@ -54,7 +54,7 @@
     public IEnumerable<Buy> Buys { get; set; }
 
     [Parameter]
-    public string ButtonLabel { get; set; } = "Shipped";
+    public string ButtonLabel { get; set; } = "Collected";
 
     [Parameter]
     public EventCallback<int> BuySelected { get; set; }

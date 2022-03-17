@@ -2,6 +2,7 @@ using Books_Project.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,6 +32,11 @@ namespace Books_Project
                 options.UseSqlite(Configuration["ConnectionStrings:BookDBConnection"]);
             });
 
+            services.AddDbContext<AppIdentityDBContext>(options =>
+                options.UseSqlite(Configuration["ConnectionStrings:IdentityConnection"]));
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppIdentityDBContext>();
             services.AddScoped<IBooksRepository, EFBookRepository>();
             services.AddScoped<IBuyRepository, EFBuyRepository > ();
             services.AddRazorPages();
@@ -53,6 +59,8 @@ namespace Books_Project
             app.UseStaticFiles();
             app.UseSession();
             app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
@@ -78,6 +86,8 @@ namespace Books_Project
                 
                 
             });
+
+            IdentitySeedData.EnsurePopulated(app);
         }
     }
 }
